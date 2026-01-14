@@ -1,5 +1,4 @@
 import { deleteTask, updateTask } from "../api/tasksApi";
-
 function TaskItem({ task, onRefresh }) {
   const toggleStatus = async () => {
     await updateTask(task.id, {
@@ -14,7 +13,7 @@ function TaskItem({ task, onRefresh }) {
     await deleteTask(task.id);
     onRefresh();
   };
-
+  
   return (
     <div className="task-card">
       <h3>{task.title}</h3>
@@ -25,7 +24,6 @@ function TaskItem({ task, onRefresh }) {
       <button onClick={toggleStatus}>
         {task.status === "completed" ? "Mark Pending" : "Mark Completed"}
       </button>
-
       <button onClick={handleDelete}>Delete</button>
     </div>
   );

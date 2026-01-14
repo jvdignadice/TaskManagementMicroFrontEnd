@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createTask } from "../api/tasksApi";
+import { exportTasksCsv } from "../api/tasksApi";
 
 function TaskForm({ onTaskSaved }) {
   const [title, setTitle] = useState("");
@@ -30,7 +31,9 @@ function TaskForm({ onTaskSaved }) {
       setError("Failed to create task");
     }
   };
-
+  const handleExport = () => {
+    exportTasksCsv({ status: "Pending", search: "report" });
+    };
   return (
     <form onSubmit={handleSubmit}>
       <h2>Create Task</h2>
@@ -56,8 +59,10 @@ function TaskForm({ onTaskSaved }) {
         <option value="medium">Medium</option>
         <option value="high">High</option>
       </select>
-
-      <button type="submit">Add Task</button>
+      <button type="submit" style={{ marginRight: "10px" }}>Add Task</button>
+      <button onClick={handleExport} >
+      Export Tasks as CSV
+      </button>
     </form>
   );
 }
