@@ -1,19 +1,26 @@
-function TaskFilters({ onChange }) {
+import StatusFilter from "./StatusFilters";
+import PriorityFilter from "./PriorityFilter";
+
+function TaskFilters({ filters, onChange }) {
+  const handleStatusChange = (status) => {
+    onChange({ ...filters, status });
+  };
+
+  const handlePriorityChange = (priority) => {
+    onChange({ ...filters, priority });
+  };
+
   return (
     <div className="filters">
-      <select onChange={(e) => onChange({ status: e.target.value })}>
-        <option value="">All Status</option>
-        <option value="pending">Pending</option>
-        <option value="in-progress">In Progress</option>
-        <option value="completed">Completed</option>
-      </select>
+      <StatusFilter
+        value={filters.status}
+        onChange={handleStatusChange}
+      />
 
-      <select onChange={(e) => onChange({ priority: e.target.value })}>
-        <option value="">All Priority</option>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
+      <PriorityFilter
+        value={filters.priority}
+        onChange={handlePriorityChange}
+      />
     </div>
   );
 }

@@ -6,23 +6,32 @@ import { getTasks } from "./api/tasksApi";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({
+    status: "",
+    priority: ""
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const loadTasks = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const data = await getTasks(filters);
-      setTasks(data.items || data);
-    } catch (err) {
-      setError("Failed to load tasks");
-    } finally {
-      setLoading(false);
-    }
-  };
+  setLoading(true);
+  setError("");
 
+  try {
+    const data = await getTasks({
+      page: 1,
+      pageSize: 10,
+      status: filters.status,
+      priority: filters.priority
+    });
+
+    setTasks(data.taskItems); // ✅ FIX
+  } catch (err) {
+    setError("Failed to load tasks");
+  } finally {
+    setLoading(false);
+  }
+};
   useEffect(() => {
     loadTasks();
   }, [filters]);
@@ -33,7 +42,10 @@ function App() {
 
       <TaskForm onTaskSaved={loadTasks} />
 
-      <TaskFilters onChange={setFilters} />
+      <TaskFilters
+        filters={filters}
+        onChange={setFilters}
+      />
 
       {loading && <p>Loading tasks...</p>}
       {error && <p className="error">{error}</p>}
