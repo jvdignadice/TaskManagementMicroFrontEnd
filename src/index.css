@@ -1,4 +1,40 @@
 /* =========================
+   Theme Variables
+========================= */
+
+:root {
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --text: #333;
+  --muted-text: #6b7280;
+  --border: #ddd;
+  --primary: #2563eb;
+  --primary-hover: #36383e;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --btn: rgb(71, 70, 70);
+}
+
+body.dark {
+  --bg: #292842;
+  --surface: #282752;
+  --text: #eaeaea;
+  --muted-text: #9ca3af;
+  --border: #333;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --btn: #ebefec;
+}
+
+
+.theme-toggle{
+    background-color: var(--btn);
+    height: 50px; /* Same value as width */
+    width: 50px;
+    border-radius: 50%;
+}
+
+/* =========================
    Global Styles
 ========================= */
 
@@ -11,9 +47,10 @@
 }
 
 body {
-  background-color: #f5f6fa;
-  color: #333;
+  background-color: var(--bg);
+  color: var(--text);
   line-height: 1.5;
+  transition: background 0.25s, color 0.25s;
 }
 
 /* =========================
@@ -21,14 +58,50 @@ body {
 ========================= */
 
 .container {
-  max-width: 900px;
+  background: var(--surface);
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
 }
 
+
 h1 {
   text-align: center;
   margin-bottom: 1.5rem;
+}
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.task-table th,
+.task-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.table-controls,
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.75rem 0;
+}
+
+.pagination button {
+  padding: 0.4rem 0.8rem;
+}
+@media (max-width: 600px) {
+  .pagination {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
 /* =========================
@@ -36,12 +109,21 @@ h1 {
 ========================= */
 
 form {
-  background: #fff;
+  background: var(--surface);
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
+
+input,
+textarea,
+select {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
 
 form h2 {
   margin-bottom: 0.75rem;
@@ -67,20 +149,22 @@ button {
   padding: 0.6rem 1rem;
   border: none;
   border-radius: 4px;
-  background-color: #2563eb;
+  background-color: var(--primary);
   color: white;
   font-size: 0.9rem;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 button:hover {
-  background-color: #1e4fd8;
+  background-color: var(--primary-hover);
 }
 
 button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
 }
+
 
 /* =========================
    Filters
@@ -173,4 +257,46 @@ button:disabled {
     width: 100%;
     margin-right: 0;
   }
+}
+
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background: orange;
+  display: flex;
+  gap: 10px;
+}
+.delete-btn {
+  background: #dc2626;
+  display: flex;
+  gap: 10px;
+}
+.export-csv-button {
+  background: green;
 }

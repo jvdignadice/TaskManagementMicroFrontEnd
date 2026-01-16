@@ -8,7 +8,7 @@ function TaskForm({ onTaskSaved }) {
   const [dueDate, setDueDate] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -27,7 +27,7 @@ function TaskForm({ onTaskSaved }) {
         priority: Number(priority),
         dueDate: dueDate ? new Date(dueDate).toISOString() : null
       });
-      
+
       setTitle("");
       setDescription("");
       setPriority("1");
@@ -77,11 +77,11 @@ function TaskForm({ onTaskSaved }) {
         onChange={(e) => setDueDate(e.target.value)}
       />
 
-      <button type="submit" disabled={loading} style={{ marginRight: "10px" }}>
+      <button type="submit" disabled={loading} style={{ marginRight: "10px", background: "green" }}className="add-task-btn">
         {loading ? "Saving..." : "Add Task"}
       </button>
 
-      <button type="button" onClick={handleExport}>
+      <button type="button" onClick={handleExport} className="export-csv-button">
         Export Tasks as CSV
       </button>
     </form>
