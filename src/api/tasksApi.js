@@ -1,5 +1,10 @@
 import axios from "axios";
 
+/*
+const API_BASE = "https://localhost:7043/task-management";
+for the sake of this assessment please use the above commented
+variable instead (if you don't want to create a .env), when cloning this repo
+*/
 const API_BASE = import.meta.env.VITE_API_BASE;
 export const getTasks = async (params) => {
   const response = await axios.get(API_BASE, { params });
@@ -44,7 +49,6 @@ export const exportTasksCsv = async (params) => {
     link.click();
     document.body.removeChild(link);
     
-    // Release URL
     window.URL.revokeObjectURL(url);
   } catch (error) {
     console.error("Failed to download CSV:", error);
