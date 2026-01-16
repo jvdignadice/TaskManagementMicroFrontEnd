@@ -4,12 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
-
 # jsons
 /package-lock.json
 /package.json
 # testing
 /coverage
+
+# env
+/.env
 
 # next.js
 /.next/

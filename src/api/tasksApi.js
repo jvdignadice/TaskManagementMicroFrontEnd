@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "https://localhost:7043/task-management";
-
+const API_BASE = import.meta.env.VITE_API_BASE;
 export const getTasks = async (params) => {
   const response = await axios.get(API_BASE, { params });
   console.log("response:", response.data);
